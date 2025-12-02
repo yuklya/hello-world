@@ -23,9 +23,17 @@ namespace topit {
 int main() {
   using namespace topit;
   IDraw* shp[3] = {};
-  shp[0] = new Dot  
-  p_t a{1, 1}, b{0, 1};
-  std::cout << (a == b) << "\n";
+  try {
+    shp[0] = new Dot({0, 0});
+    shp[1] = new Dot ({2, 3});
+    
+  } catch (...) {}
+    std:: cerr<< "Error!\n";
+    err = 1;
+  }
+  delete shp[1];
+  delete shp[0];
+  return err;
 }
 topit::p_t topit::Dot::begin() const {
   return d;
@@ -44,6 +52,7 @@ bool topit::operator!= (p_t a, p_t b) {
 }
 
 topit::Dot::Dot(p_t dd):
+ IDraw(),
  d{dd}
 {}
 
