@@ -52,12 +52,9 @@ int main() {
     
     size_t width = cols(fr);
     for (size_t j = 0; j < width; ++j) {
-      cnv[j] = '#';
+      cnv[j] = '#'; 
     }
     
-    for (size_t i = 0; i<s; ++i) {
-      paint(pts[i], cnv, fr, '#');
-    } 
     
     flush(std::cout, cnv, fr);
     delete [] cnv;
