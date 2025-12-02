@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 namespace topit {
   struct p_t {
@@ -46,19 +47,28 @@ int main() {
       append (shp[i], &pts, s);
     }
     f_t fr = frame(pts, s);
+    
     char * cnv = canvas(fr, '.');
+    
+    size_t width = cols(fr);
+    for (size_t j = 0; j < width; ++j) {
+      cnv[j] = '#';
+    }
+    
     for (size_t i = 0; i<s; ++i) {
       paint(pts[i], cnv, fr, '#');
     } 
+    
     flush(std::cout, cnv, fr);
     delete [] cnv;
-   } catch (...) {
+  } catch (...) {
     std:: cerr<< "Error!\n";
     err = 1;
   }
-  delete shp[2];
-  delete shp[1];
-  delete shp[0];
+  for (int i = 2; i >= 0; --i) {
+    delete shp[i];
+  }
+  delete[] pts;
   return err;
 }
 
